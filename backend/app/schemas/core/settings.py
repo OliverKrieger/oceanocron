@@ -1,18 +1,10 @@
 from typing import Literal
 
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from schemas.core.database import DatabaseSettings
 
 
-class Settings(BaseSettings):
+class Settings(DatabaseSettings):
     """Immutable application configuration schema."""
-
-    model_config = SettingsConfigDict(
-        frozen=True,
-        env_file=".backend.env",
-        env_file_encoding="utf-8",
-        env_nested_delimiter="__",
-        extra="ignore",
-    )
 
     environment: Literal["local", "test", "uat", "prod"] = "local"
     debug: bool = False
